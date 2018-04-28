@@ -21,9 +21,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="train cifar10",
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
-        '--train_data', help='training data, recdio file', type=str)
+        '--data-train', help='training data, recdio file', type=str)
     parser.add_argument(
-        '--val_data', help='validation data, recdio file', type=str)
+        '--data-val', help='validation data, recdio file', type=str)
 
 """     # 在一个训练任务的训练环境中，每一次训练被称为一个“训练实例”
     train_ins = train.TrainInstance()
