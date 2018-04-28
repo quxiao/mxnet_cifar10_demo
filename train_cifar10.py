@@ -45,7 +45,6 @@ if __name__ == '__main__':
             epoch_interval=snapshot_interval_epochs, other_files=[])
     ] 
 """
-    
     fit.add_fit_args(parser)
     data.add_data_args(parser)
     data.add_data_aug_args(parser)
