@@ -54,8 +54,6 @@ if __name__ == '__main__':
         network='resnet',
         num_layers=50,
         # data
-        data_train=args.train_data,
-        data_val=args.val_data,
         num_classes=10,
         num_examples=50000,
         image_shape='3,28,28',
