@@ -8,6 +8,10 @@ from common import find_mxnet, data, fit
 from common.util import download_file
 import mxnet as mx
 
+# 调用SDK API进行训练实例的创建和状态更新
+from ava.train import base as train
+# 训练指标监控上报
+from ava.monitor import mxnet as mxnet_monitor
 
 if __name__ == '__main__':
     # download data
@@ -21,6 +25,26 @@ if __name__ == '__main__':
     parser.add_argument(
         '--val_data', help='validation data, recdio file', type=str)
 
+"""     # 在一个训练任务的训练环境中，每一次训练被称为一个“训练实例”
+    train_ins = train.TrainInstance()
+
+    # add CALLBACK
+    batch_end_cb = train_ins.get_monitor_callback(
+        "mxnet",
+        batch_size=128,  # args.batch_size
+        batch_freq=10)
+    args.batch_end_callback = batch_end_cb
+
+    epoch_end_cb = [
+        # mxnet default epoch callback
+        mx.callback.do_checkpoint(
+            snapshot_prefix, snapshot_interval_epochs),
+        train_ins.get_epoch_end_callback(
+            "mxnet", batch_of_epoch=batch_of_epoch,
+            epoch_interval=snapshot_interval_epochs, other_files=[])
+    ] """
+
+
     fit.add_fit_args(parser)
     data.add_data_args(parser)
     data.add_data_aug_args(parser)
@@ -30,8 +54,8 @@ if __name__ == '__main__':
         network='resnet',
         num_layers=50,
         # data
-        data_train=train_fname,
-        data_val=val_fname,
+        data_train=args.train_data,
+        data_val=args.val_data,
         num_classes=10,
         num_examples=50000,
         image_shape='3,28,28',
@@ -40,7 +64,9 @@ if __name__ == '__main__':
         batch_size=128,
         num_epochs=300,
         lr=.05,
-        lr_step_epochs='200,250',
+        lr_step_epochs='200,250'
+        #epoch_end_cb="epoch_end_callback",
+        #batch_end_cb="batch_end_callback"
     )
     args = parser.parse_args()
 
@@ -51,3 +77,7 @@ if __name__ == '__main__':
 
     # train
     fit.fit(args, sym, data.get_rec_iter)
+
+    # 训练结束，更新训练实例的状态，err_msg为空时表示训练正常结束，
+    # 不为空表示训练异常结束
+    #train_ins.done(err_msg=err_msg)
