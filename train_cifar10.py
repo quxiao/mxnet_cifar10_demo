@@ -25,7 +25,8 @@ if __name__ == '__main__':
     parser.add_argument(
         '--data-val', help='validation data, recdio file', type=str)
 
-"""     # 在一个训练任务的训练环境中，每一次训练被称为一个“训练实例”
+"""     
+    # 在一个训练任务的训练环境中，每一次训练被称为一个“训练实例”
     train_ins = train.TrainInstance()
 
     # add CALLBACK
@@ -42,7 +43,8 @@ if __name__ == '__main__':
         train_ins.get_epoch_end_callback(
             "mxnet", batch_of_epoch=batch_of_epoch,
             epoch_interval=snapshot_interval_epochs, other_files=[])
-    ] """
+    ] 
+"""
     
     fit.add_fit_args(parser)
     data.add_data_args(parser)
