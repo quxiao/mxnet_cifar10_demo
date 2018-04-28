@@ -43,8 +43,7 @@ if __name__ == '__main__':
             "mxnet", batch_of_epoch=batch_of_epoch,
             epoch_interval=snapshot_interval_epochs, other_files=[])
     ] """
-
-
+    
     fit.add_fit_args(parser)
     data.add_data_args(parser)
     data.add_data_aug_args(parser)
