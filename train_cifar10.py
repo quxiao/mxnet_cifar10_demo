@@ -12,6 +12,7 @@ import mxnet as mx
 from ava.train import base as train
 # 训练指标监控上报
 from ava.monitor import mxnet as mxnet_monitor
+from ava.utils import utils
 
 if __name__ == '__main__':
     # download data
