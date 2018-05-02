@@ -41,7 +41,7 @@ if __name__ == '__main__':
         "mxnet",
         batch_size=128,  # args.batch_size
         batch_freq=10)
-    args.batch_end_callback = batch_end_cb
+    #args.batch_end_callback = batch_end_cb
     # 测试
     actual_batch_size = 128 * 2
     batch_of_epoch = utils.ceil_by_level(
