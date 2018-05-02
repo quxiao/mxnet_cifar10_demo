@@ -64,7 +64,7 @@ if __name__ == '__main__':
         num_layers=50,
         # data
         num_classes=10,
-        num_examples=40000,
+        num_examples=50000,
         image_shape='3,28,28',
         pad_size=4,
         # train
