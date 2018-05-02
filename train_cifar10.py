@@ -25,7 +25,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--data-val', help='validation data, recdio file', type=str)
 
-"""     
+     
     # 在一个训练任务的训练环境中，每一次训练被称为一个“训练实例”
     train_ins = train.TrainInstance()
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
             "mxnet", batch_of_epoch=batch_of_epoch,
             epoch_interval=snapshot_interval_epochs, other_files=[])
     ] 
-"""
+
     fit.add_fit_args(parser)
     data.add_data_args(parser)
     data.add_data_aug_args(parser)
@@ -78,4 +78,4 @@ if __name__ == '__main__':
 
     # 训练结束，更新训练实例的状态，err_msg为空时表示训练正常结束，
     # 不为空表示训练异常结束
-    #train_ins.done(err_msg=err_msg)
+    train_ins.done(err_msg=err_msg)
