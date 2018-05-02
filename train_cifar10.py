@@ -29,13 +29,22 @@ if __name__ == '__main__':
     # 在一个训练任务的训练环境中，每一次训练被称为一个“训练实例”
     train_ins = train.TrainInstance()
 
+    # 添加监控
+    snapshot_prefix = train_ins.get_snapshot_base_path() + "/snapshot"
+    snapshot_interval_epochs = 1
+    #snapshot_interval_epochs = params.get_value(
+    #        "intervals.snapshotIntervalEpochs", default=1)
+    
     # add CALLBACK
     batch_end_cb = train_ins.get_monitor_callback(
         "mxnet",
         batch_size=128,  # args.batch_size
         batch_freq=10)
     args.batch_end_callback = batch_end_cb
-
+    # 测试
+    actual_batch_size = 128 * 2
+    batch_of_epoch = utils.ceil_by_level(
+            float(utils.get_sampleset_num() / actual_batch_size))
     epoch_end_cb = [
         # mxnet default epoch callback
         mx.callback.do_checkpoint(
@@ -55,7 +64,7 @@ if __name__ == '__main__':
         num_layers=50,
         # data
         num_classes=10,
-        num_examples=50000,
+        num_examples=40000,
         image_shape='3,28,28',
         pad_size=4,
         # train
@@ -63,8 +72,8 @@ if __name__ == '__main__':
         num_epochs=300,
         lr=.05,
         lr_step_epochs='200,250'
-        #epoch_end_callback=epoch_end_cb,
-        #batch_end_callback=batch_end_cb
+        epoch_end_callback=epoch_end_cb,
+        batch_end_callback=batch_end_cb
     )
     args = parser.parse_args()
 
