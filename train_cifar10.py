@@ -63,8 +63,8 @@ if __name__ == '__main__':
         num_epochs=300,
         lr=.05,
         lr_step_epochs='200,250'
-        #epoch_end_cb="epoch_end_callback",
-        #batch_end_cb="batch_end_callback"
+        #epoch_end_callback=epoch_end_cb,
+        #batch_end_callback=batch_end_cb
     )
     args = parser.parse_args()
 
